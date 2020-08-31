@@ -75,14 +75,39 @@
 
     // Create Dino Compare Method 1
     // NOTE: Weight in JSON file is in lbs, height in inches. 
+    Dino.prototype.compareHeight = function(humanHeight) {
+        if (this.height > humanHeight) {
+            return `The ${this.species} is taller than you!`;
+        } else if(this.height < humanHeight) {
+            return `The ${this.species} is shorter than you!`;
+        } else {
+            return `The ${this.species} is the same height as you!`;
+        }
+    }
 
     
     // Create Dino Compare Method 2
     // NOTE: Weight in JSON file is in lbs, height in inches.
+    Dino.prototype.compareWeight = function(humanWeight) {
+        if (this.weight > humanWeight) {
+            return `The ${this.species} is heavier than you!`;
+        } else if(this.weight < humanWeight) {
+            return `The ${this.species} is lighter than you!`;
+        } else {
+            return `The ${this.species} is the same weight as you!`;
+        }
+    }
 
     
     // Create Dino Compare Method 3
     // NOTE: Weight in JSON file is in lbs, height in inches.
+    Dino.prototype.compareDiet = function(humanDiet) {
+        if (this.diet === humanDiet) {
+            return `The ${this.species} and you have the same diet!`;
+        } else {
+            return `The ${this.species} and you have different diets!`;
+        }
+    }
 
 
     // Generate Tiles for each Dino in Array
@@ -99,6 +124,6 @@ document.getElementById('btn').addEventListener('click', (event) => {
     //console.log(`Name: ${human.name}; Weight: ${human.weight}; Height: ${human.height}; Diet: ${human.diet}`);
     //console.log(`Name: ${dinos[0].species}; Weight: ${dinos[0].weight}; Height: ${dinos[0].height}; Diet: ${dinos[0].diet}`);
     
-    //prepare
-    //display infographic
+    // TODO: prepare function call
+    // TODO: display infographic function call
 });
