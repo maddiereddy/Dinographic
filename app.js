@@ -50,75 +50,105 @@ class Dino {
 }
 
 
-    // Create Dino Objects
-    const dinos = [];
+// Create Dino Objects
+const dinos = [];
 
-    Dinos.map(data => {
-        const dino = new Dino(
-            data.species,
-            data.weight,
-            data.height,
-            data.diet,
-            data.where,
-            data.when,
-            data.fact
-        );
-        dino.image = `./images/${this.species.toLowerCase()}.png`;
-        dinos.push(dino);
-    });
+Dinos.map(data => {
+    const dino = new Dino(
+        data.species,
+        data.weight,
+        data.height,
+        data.diet,
+        data.where,
+        data.when,
+        data.fact
+    );
+    dino.image = `./images/${this.species.toLowerCase()}.png`;
+    dinos.push(dino);
+});
 
 
-    // Create Human Object
-    function Human (name, weight, height, diet) {
+// Create Human Object
+function Human (name, weight, height, diet) {
+    return {
+        name: name,
+        weight: weight,
+        height: height,
+        diet: diet
+    };
+}
+
+// Use IIFE to get human data from form
+function getUserInput() {
+    const input = (function () {
+
+        let name = document.getElementById("name").value;
+        let feet = document.getElementById("feet").value;
+        let inches = document.getElementById("inches").value;
+        let weight = document.getElementById("weight").value;
+        let diet = document.getElementById("diet").value;
+        let image = `./images/human.png`;
+
+        function getName() {
+            return name;
+        }
+        function getHeight() {
+            feet = Number(feet);
+            inches = Number(inches);
+            let heightInInches = ( feet * 12 ) + inches;
+            return heightInInches;
+        }
+        function getWeight() {
+            return weight; 
+        }
+        function getDiet() {
+            return diet;
+        }
+        function getImage() {
+            return image;
+        }
         return {
-            name: name,
-            weight: weight,
-            height: height,
-            diet: diet
+            name: getName(),
+            height: getHeight(),
+            weight: getWeight(),
+            diet: getDiet(),
+            image: getImage()
         };
+    })();
+    return input;
+}
+
+// Generate Tiles for each Dino in Array
+// Create a Tile class
+class Tile {
+    constructor(name, image, fact) {
+        this.name = name;
+        this.image = image;
+        this.fact = fact;
     }
+}
 
-    // Use IIFE to get human data from form
-    function getUserInput() {
-        const input = (function () {
-
-            let name = document.getElementById("name").value;
-            let feet = document.getElementById("feet").value;
-            let inches = document.getElementById("inches").value;
-            let weight = document.getElementById("weight").value;
-            let diet = document.getElementById("diet").value;
-            let image = `./images/human.png`;
-
-            function getName() {
-                return name;
-            }
-            function getHeight() {
-                feet = Number(feet);
-                inches = Number(inches);
-                let heightInInches = ( feet * 12 ) + inches;
-                return heightInInches;
-            }
-            function getWeight() {
-                return weight; 
-            }
-            function getDiet() {
-                return diet;
-            }
-            function getImage() {
-                return image;
-            }
-            return {
-                name: getName(),
-                height: getHeight(),
-                weight: getWeight(),
-                diet: getDiet(),
-                image: getImage()
-            };
-        })();
-        return input;
+//get random fact
+const getRandomFact = (dino, human) => {
+    if (dino.name === 'Pigeon') {
+      return 'All birds are dinosaurs.';
     }
-
-    // Generate Tiles for each Dino in Array
+    const r = Math.floor(Math.random() * Math.floor(6));
+    switch (r) {
+      case 0:
+        return dino.fact;
+      case 1:
+        return `The ${dino.species} is from the ${dino.when} era`;
+      case 2:
+        return `The ${dino.species} is found in ${dino.where}`;
+      case 3:
+        return dino.compareHeight(human.height);
+      case 4:
+        return dino.compareWeight(human.weight);
+      case 5:
+        return dino.compareDiet(human.diet);
+    }
+  };
   
         // Add tiles to DOM
 
