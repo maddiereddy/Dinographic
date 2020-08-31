@@ -54,7 +54,7 @@
             function getHeight() {
                 feet = Number(feet);
                 inches = Number(inches);
-                heightInInches = ( feet * 12 ) + inches;
+                let heightInInches = ( feet * 12 ) + inches;
                 return heightInInches;
             }
             function getWeight() {
@@ -96,5 +96,9 @@
 document.getElementById('btn').addEventListener('click', (event) => {
     event.preventDefault;
     const human = getUserInput();
-    console.log(`Name: ${human.name}; Weight: ${human.weight}; Height: ${human.height}; Diet: ${human.diet}`);
+    //console.log(`Name: ${human.name}; Weight: ${human.weight}; Height: ${human.height}; Diet: ${human.diet}`);
+    //console.log(`Name: ${dinos[0].species}; Weight: ${dinos[0].weight}; Height: ${dinos[0].height}; Diet: ${dinos[0].diet}`);
+    
+    //prepare
+    //display infographic
 });
