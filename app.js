@@ -1,6 +1,7 @@
 
     // Create Dino Constructor
-    function Dino(species, weight, height, diet, where, when, fact) {
+class Dino {
+    constructor(species, weight, height, diet, where, when, fact) {
         this.species = species;
         this.weight = weight;
         this.height = height;
@@ -9,6 +10,44 @@
         this.when = when;
         this.fact = fact;
     }
+
+    // Create Dino Compare Method 1
+    // NOTE: Weight in JSON file is in lbs, height in inches. 
+    compareHeight(humanHeight) {
+        if (this.height > humanHeight) {
+            return `The ${this.species} is taller than you!`;
+        }
+        else if (this.height < humanHeight) {
+            return `The ${this.species} is shorter than you!`;
+        }
+        else {
+            return `The ${this.species} is the same height as you!`;
+        }
+    }
+    // Create Dino Compare Method 2
+    // NOTE: Weight in JSON file is in lbs, height in inches.
+    compareWeight(humanWeight) {
+        if (this.weight > humanWeight) {
+            return `The ${this.species} is heavier than you!`;
+        }
+        else if (this.weight < humanWeight) {
+            return `The ${this.species} is lighter than you!`;
+        }
+        else {
+            return `The ${this.species} is the same weight as you!`;
+        }
+    }
+    // Create Dino Compare Method 3
+    // NOTE: Weight in JSON file is in lbs, height in inches.
+    compareDiet(humanDiet) {
+        if (this.diet..toLowerCase() === humanDiet.toLowerCase()) {
+            return `The ${this.species} and you have the same diet!`;
+        }
+        else {
+            return `The ${this.species} and you have different diets!`;
+        }
+    }
+}
 
 
     // Create Dino Objects
@@ -24,6 +63,7 @@
             data.when,
             data.fact
         );
+        dino.image = `./images/${this.species.toLowerCase()}.png`;
         dinos.push(dino);
     });
 
@@ -47,6 +87,7 @@
             let inches = document.getElementById("inches").value;
             let weight = document.getElementById("weight").value;
             let diet = document.getElementById("diet").value;
+            let image = `./images/human.png`;
 
             function getName() {
                 return name;
@@ -63,52 +104,19 @@
             function getDiet() {
                 return diet;
             }
+            function getImage() {
+                return image;
+            }
             return {
                 name: getName(),
                 height: getHeight(),
                 weight: getWeight(),
-                diet: getDiet()
+                diet: getDiet(),
+                image: getImage()
             };
         })();
         return input;
     }
-
-    // Create Dino Compare Method 1
-    // NOTE: Weight in JSON file is in lbs, height in inches. 
-    Dino.prototype.compareHeight = function(humanHeight) {
-        if (this.height > humanHeight) {
-            return `The ${this.species} is taller than you!`;
-        } else if(this.height < humanHeight) {
-            return `The ${this.species} is shorter than you!`;
-        } else {
-            return `The ${this.species} is the same height as you!`;
-        }
-    }
-
-    
-    // Create Dino Compare Method 2
-    // NOTE: Weight in JSON file is in lbs, height in inches.
-    Dino.prototype.compareWeight = function(humanWeight) {
-        if (this.weight > humanWeight) {
-            return `The ${this.species} is heavier than you!`;
-        } else if(this.weight < humanWeight) {
-            return `The ${this.species} is lighter than you!`;
-        } else {
-            return `The ${this.species} is the same weight as you!`;
-        }
-    }
-
-    
-    // Create Dino Compare Method 3
-    // NOTE: Weight in JSON file is in lbs, height in inches.
-    Dino.prototype.compareDiet = function(humanDiet) {
-        if (this.diet === humanDiet) {
-            return `The ${this.species} and you have the same diet!`;
-        } else {
-            return `The ${this.species} and you have different diets!`;
-        }
-    }
-
 
     // Generate Tiles for each Dino in Array
   
