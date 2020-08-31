@@ -12,6 +12,20 @@
 
 
     // Create Dino Objects
+    const dinos = [];
+
+    Dinos.map(data => {
+        const dino = new Dino(
+            data.species,
+            data.weight,
+            data.height,
+            data.diet,
+            data.where,
+            data.when,
+            data.fact
+        );
+        dinos.push(dino);
+    });
 
 
     // Create Human Object
@@ -25,37 +39,39 @@
     }
 
     // Use IIFE to get human data from form
-    const human = (function () {
+    function getUserInput() {
+        const input = (function () {
 
-        let name = document.getElementById('name').value;
-        let feet = document.getElementById("feet").value;
-        let inches = document.getElementById("inches").value;
-        let weight = document.getElementById('weight').value;
-        let diet = document.getElementById('diet').value;
+            let name = document.getElementById("name").value;
+            let feet = document.getElementById("feet").value;
+            let inches = document.getElementById("inches").value;
+            let weight = document.getElementById("weight").value;
+            let diet = document.getElementById("diet").value;
 
-        function getName() {
-            return name;
-        }
-        function getHeight() {
-            feet = Number(feet);
-            inches = Number(inches);
-            finalHeight = ( feet * 12 ) + inches;
-            return finalHeight;
-        }
-        function getWeight() {
-            return weight; 
-        }
-        function getDiet() {
-            return diet;
-        }
-        return {
-            name: getName(),
-            height: getHeight(),
-            weight: getWeight(),
-            diet: getDiet()
-        };
-    })();
-
+            function getName() {
+                return name;
+            }
+            function getHeight() {
+                feet = Number(feet);
+                inches = Number(inches);
+                heightInInches = ( feet * 12 ) + inches;
+                return heightInInches;
+            }
+            function getWeight() {
+                return weight; 
+            }
+            function getDiet() {
+                return diet;
+            }
+            return {
+                name: getName(),
+                height: getHeight(),
+                weight: getWeight(),
+                diet: getDiet()
+            };
+        })();
+        return input;
+    }
 
     // Create Dino Compare Method 1
     // NOTE: Weight in JSON file is in lbs, height in inches. 
@@ -78,6 +94,7 @@
 
 // On button click, prepare and display infographic
 document.getElementById('btn').addEventListener('click', (event) => {
-    let user = Human(human.name, human.height, human.weight, human.diet);
-    console.log(user.name);
+    event.preventDefault;
+    const human = getUserInput();
+    console.log(`Name: ${human.name}; Weight: ${human.weight}; Height: ${human.height}; Diet: ${human.diet}`);
 });
