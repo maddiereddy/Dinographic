@@ -40,7 +40,7 @@ class Dino {
     // Create Dino Compare Method 3
     // NOTE: Weight in JSON file is in lbs, height in inches.
     compareDiet(humanDiet) {
-        if (this.diet..toLowerCase() === humanDiet.toLowerCase()) {
+        if (this.diet.toLowerCase() === humanDiet.toLowerCase()) {
             return `The ${this.species} and you have the same diet!`;
         }
         else {
