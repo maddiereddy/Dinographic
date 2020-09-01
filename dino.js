@@ -6,7 +6,7 @@ Dinos = [
         "diet": "herbavore",
         "where": "North America",
         "when": "Late Cretaceous",
-        "fact": "First discovered in 1889 by Othniel Charles Marsh"
+        "fact": "First discovered in 1889 by Othniel Charles Marsh."
     },
     {
         "species": "Tyrannosaurus Rex",
