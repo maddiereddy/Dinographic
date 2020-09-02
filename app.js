@@ -1,5 +1,5 @@
 
-    // Create Dino Constructor
+// Create Dino Constructor
 class Dino {
     constructor(species, weight, height, diet, where, when, fact) {
         this.species = species;
@@ -69,15 +69,6 @@ Dinos.map(data => {
 
 
 // Create Human Object
-function Human (name, weight, height, diet) {
-    return {
-        name: name,
-        weight: weight,
-        height: height,
-        diet: diet
-    };
-}
-
 // Use IIFE to get human data from form
 function getUserInput() {
     const input = (function () {
@@ -130,29 +121,39 @@ class Tile {
 //get random fact
 const getRandomFact = (dino, human) => {
     if (dino.species === 'Pigeon') {
-      return dino.fact;
+        return "All birds are Dinosaurs.";
     }
+
     const r = Math.floor(Math.random() * Math.floor(6));
+    let strFact;
+
     switch (r) {
-      case 0:
-        return dino.fact;
-      case 1:
-        return `The ${dino.species} is from the ${dino.when} era`;
-      case 2:
-        return `The ${dino.species} is found in ${dino.where}`;
-      case 3:
-        return dino.compareHeight(human.height);
-      case 4:
-        return dino.compareWeight(human.weight);
-      case 5:
-        return dino.compareDiet(human.diet);
+        case 0:
+            strFact = `The ${dino.species} is from the ${dino.when} era`;
+            break;
+        case 1:
+            strFact = `The ${dino.species} is found in ${dino.where}`;
+            break; 
+        case 2:
+            strFact =  dino.compareHeight(human.height);
+            break;
+        case 3:
+            strFact = dino.compareWeight(human.weight);
+            break;
+        case 4:
+            strFact = dino.compareDiet(human.diet);
+            break;
+        case 5:
+        default:
+            strFact = dino.fact;
     }
+    return strFact;
 };
 
 // Generate Tiles for each Dino in Array
-const generateTiles = function(dinos, human) {
+const generateTiles = function() {
     let tiles = [];
-    dinos.map((dino, index) => {
+    dinos.forEach((dino, index) => {
         let tile;
         if (index === 4) {
             tile = new Tile(human.name, human.image, "");
@@ -165,7 +166,7 @@ const generateTiles = function(dinos, human) {
 
     // Add tiles to DOM
     const grid = document.getElementById("grid");
-    tiles.map(tile => {
+    tiles.forEach(tile => {
         let gridItem = document.createElement("div");
         gridItem.className = "grid-item";
         grid.appendChild(gridItem);
@@ -186,16 +187,28 @@ const generateTiles = function(dinos, human) {
 
     // Remove form from screen
     (function () {
-        let myForm = document.getElementById('dino-compare');
-        myForm.style.display = 'none';
+        let myForm = document.getElementById("dino-compare");
+        myForm.style.display = "none";
+        let btnRefresh = document.getElementById("refresh");
+        btnRefresh.style.display = "inline-block";
     })();
-}
+};
 
+
+let human;
 // On button click, prepare and display infographic
-document.getElementById('btn').addEventListener('click', (event) => {
+document.getElementById("btn").addEventListener("click", (event) => {
     event.preventDefault;
-    const human = getUserInput();
-     
+    human = getUserInput();
+
     // Prepare and display infographic
-    generateTiles(dinos, human);
+    generateTiles();
+    
+});
+
+document.getElementById("refresh").addEventListener("click", (event) => {
+    event.preventDefault;
+    const getGrid = document.getElementById("grid");
+    getGrid.innerHTML = "";
+    generateTiles();
 });

@@ -172,3 +172,17 @@ select {
     display: block;
     font-size: 0.7em;
 }
+
+#refresh {
+    display: none;
+    font-weight: bold;
+    font-family: 'Cambria', cursive;
+    padding: 0.4em;
+    margin: 1.2em auto;
+}
+
+#refresh:hover {
+    background: #777;
+    color: #fff;
+    cursor: pointer;
+}
